@@ -103,7 +103,7 @@ extension Npy {
         self.init(header: header, elementsData: data)
     }
     
-    @available(macOS 11.0, *)
+    @available(macOS 11.0, iOS 14.0, *)
     public init(shape: [Int], elements: [Float16], endian: Endian, isFortranOrder: Bool) {
         precondition(shape.reduce(1, *) == elements.count)
         let header = NpyHeader(shape: shape, dataType: .float16, endian: endian, isFortranOrder: isFortranOrder)
@@ -225,7 +225,7 @@ extension Npy {
         return uints.map { Int64(bitPattern: $0) }
     }
     
-    @available(macOS 11.0, *)
+    @available(macOS 11.0, iOS 14.0, *)
     public func elements(_ type: Float16.Type = Float16.self) -> [Float16] {
         precondition(dataType == .float16)
         let uints: [UInt16] = loadUInts(data: elementsData, count: elementsCount, endian: endian)
