@@ -112,6 +112,23 @@ class NpySaverTests: XCTestCase {
         XCTAssertEqual(e, elements)
     }
     
+    func testFormatF2() {
+        let elements: [Float16] = [-3, -2, -1, 0, 1, 2]
+        let npy = Npy(shape: [1, 1, 6], elements: elements, endian: .host, isFortranOrder: false)
+        let data = npy.format()
+        let npy2: Npy = try! Npy(data: data)
+        
+        XCTAssertEqual(npy.shape, npy2.shape)
+        
+        let e: [Float16] = npy2.elements()
+        XCTAssertEqual(e, elements)
+        
+        // Convert data to a hexadecimal string and print it
+        let hexString = data.map { String(format: "0x%02x", $0) }.joined(separator: ", ")
+        print("Hexadecimal representation of the data:")
+        print(hexString)
+    }
+  
     func testFormatF4() {
         let elements: [Float] = [-3, -2, -1, 0, 1, 2]
         let npy = Npy(shape: [3, 2], elements: elements, endian: .host, isFortranOrder: false)

@@ -12,6 +12,7 @@ public enum DataType: String {
     case int32 = "i4"
     case int64 = "i8"
     
+    case float16 = "f2"
     case float32 = "f4"
     case float64 = "f8"
     
@@ -19,6 +20,6 @@ public enum DataType: String {
         return [.bool,
                 .uint8, .uint16, .uint32, .uint64,
                 .int8, .int16, .int32, .int64,
-                .float32, .float64]
+                .float16, .float32, .float64]
     }
 }
